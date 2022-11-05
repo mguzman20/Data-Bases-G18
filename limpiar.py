@@ -1,5 +1,4 @@
 
-
 def eliminar_duplicados(lista):
     duplicados = []
     for i in range(len(lista)-1):
@@ -40,8 +39,8 @@ def cambiar_a_id(lista1, lista2, i1, i2):
         for e in range(len(lista2)):
             if busqueda == lista2[e][i2]:
                 count += 1
-                if count > 1:
-                    print(f"rep:{busqueda}-> {lista1[i][i1]}-{lista2[e][i2]}")
+                #if count > 1:
+                    #print(f"rep:{busqueda}-> {lista1[i][i1]}-{lista2[e][i2]}")
                 lista1[i][i1] = lista2[e][0]
 
 
@@ -52,9 +51,17 @@ def cambiar_a_id_cond(lista1, lista2, i1, i2, i3, i4):
         for e in range(len(lista2)):
             if busqueda == lista2[e][i2] and lista1[i][i3] == lista2[e][i4]:
                 count += 1
-                if count > 1:
-                    print(f"rep:{busqueda}-> {lista1[i][i1]}-{lista2[e][i2]}")
+                #if count > 1:
+                    #print(f"rep:{busqueda}-> {lista1[i][i1]}-{lista2[e][i2]}")
                 lista1[i][i1] = lista2[e][0]
+
+
+def formato_fecha(fecha):
+    f1 = fecha.strip().split("/")
+    if len(f1) < 2:
+        print(f1)
+    fecha2 = f"{f1[2]}-{f1[1]}-{f1[0]}"
+    return fecha2
 
 
 # CARGAR DATOS
@@ -125,10 +132,13 @@ cambiar_a_id(artistas_eventos, artistas, 1, 1)
 
 with open("productora.csv", "w") as f:
     for t in productoras:
+        t[3] = formato_fecha(t[3])
         print(f"{t[0]},{t[1]},{t[2]},{t[3]},{t[4]}", file=f)
 
 with open("evento.csv", "w") as f:
     for t in eventos:
+        t[3] = formato_fecha(t[3])
+        t[4] = formato_fecha(t[4])
         print(f"{t[0]},{t[1]},{t[2]},{t[3]},{t[4]},{t[5]}", file=f)
 
 with open("recinto.csv", "w") as f:
@@ -145,4 +155,5 @@ with open("artista.csv", "w") as f:
 
 with open("Artista_Evento.csv", "w") as f:
     for t in artistas_eventos:
+        t[2] = formato_fecha(t[2])
         print(f"{t[0]},{t[1]},{t[2]}", file=f)
